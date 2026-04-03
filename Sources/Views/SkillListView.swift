@@ -90,5 +90,8 @@ struct SkillRowView: View {
         .padding(.vertical, 8)
         .background(Color(.controlBackgroundColor).opacity(0.5))
         .cornerRadius(8)
+        .onTapGesture(count: 2) {
+            NSWorkspace.shared.open(URL(fileURLWithPath: skill.filePath))
+        }
     }
 }

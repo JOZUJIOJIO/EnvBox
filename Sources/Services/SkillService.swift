@@ -82,7 +82,7 @@ class SkillService {
                 continue
             }
             let description = SkillTranslations.translate(name: meta.name, original: meta.description)
-            skills.append(Skill(name: meta.name, description: description, source: source))
+            skills.append(Skill(name: meta.name, description: description, source: source, filePath: skillMdPath))
         }
         return skills.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
