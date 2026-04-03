@@ -1,0 +1,91 @@
+<h2>EnvBox v2 — 加入 Skills Tab</h2>
+<p class="subtitle">顶部 Tab 切换，API Keys 和 Skills 两个视图</p>
+
+<div class="split">
+  <!-- API Keys Tab (existing) -->
+  <div class="mockup">
+    <div class="mockup-header">Tab: API Keys（现有功能）</div>
+    <div class="mockup-body" style="background:#1a1a1a;padding:0;border-radius:12px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+
+      <!-- Tab bar -->
+      <div style="display:flex;border-bottom:1px solid #333;">
+        <div style="flex:1;text-align:center;padding:10px 0;font-size:13px;font-weight:600;color:#68f;border-bottom:2px solid #68f;">🔑 API Keys</div>
+        <div style="flex:1;text-align:center;padding:10px 0;font-size:13px;color:#666;">⚡ Skills</div>
+      </div>
+
+      <!-- Search + Add -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;">
+        <div style="background:#2a2a2a;border-radius:6px;padding:5px 10px;color:#666;font-size:12px;flex:1;margin-right:8px;">🔍 搜索...</div>
+        <span style="background:#68f;color:#fff;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:600;">+ 添加</span>
+      </div>
+
+      <!-- Variable list -->
+      <div style="padding:0 8px;">
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-family:monospace;">ANTHROPIC_API_KEY</div>
+          <div style="font-size:11px;color:#666;margin-top:3px;font-family:monospace;">sk-••••••••de58</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-family:monospace;">GEMINI_API_KEY</div>
+          <div style="font-size:11px;color:#666;margin-top:3px;font-family:monospace;">AIza••••••XXQ</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-family:monospace;">BINANCE_API_KEY</div>
+          <div style="font-size:11px;color:#666;margin-top:3px;font-family:monospace;">8WXt••••••HslJ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Tab (new) -->
+  <div class="mockup">
+    <div class="mockup-header">Tab: Skills（新功能）</div>
+    <div class="mockup-body" style="background:#1a1a1a;padding:0;border-radius:12px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+
+      <!-- Tab bar -->
+      <div style="display:flex;border-bottom:1px solid #333;">
+        <div style="flex:1;text-align:center;padding:10px 0;font-size:13px;color:#666;">🔑 API Keys</div>
+        <div style="flex:1;text-align:center;padding:10px 0;font-size:13px;font-weight:600;color:#68f;border-bottom:2px solid #68f;">⚡ Skills</div>
+      </div>
+
+      <!-- Search + count -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;">
+        <div style="background:#2a2a2a;border-radius:6px;padding:5px 10px;color:#666;font-size:12px;flex:1;margin-right:8px;">🔍 搜索...</div>
+        <span style="font-size:11px;color:#555;">68 个技能</span>
+      </div>
+
+      <!-- Skill list -->
+      <div style="padding:0 8px;">
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">screenshot</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">截取桌面或窗口截图</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">daily-tech-news</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">每日科技新闻自动采集与公众号发布</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">browse</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">Fast headless browser for QA testing</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">video-production</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">AI 视频制作导演助手</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">test-driven-development</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">TDD workflow for implementing features</div>
+        </div>
+        <div style="padding:8px 12px;border-radius:8px;margin-bottom:2px;background:#222;">
+          <div style="font-size:13px;color:#fff;font-weight:500;">systematic-debugging</div>
+          <div style="font-size:11px;color:#888;margin-top:3px;line-height:1.4;">Root cause investigation before fixes</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="border-top:1px solid #333;padding:6px 12px;">
+        <span style="font-size:10px;color:#555;">来源: ~/.claude/skills · superpowers · ~/SKILLS</span>
+      </div>
+    </div>
+  </div>
+</div>

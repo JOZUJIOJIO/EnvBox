@@ -68,3 +68,34 @@ import Foundation
     #expect(result?.name == "browse")
     #expect(result?.description.hasPrefix("Fast headless browser") == true)
 }
+
+@Test func parseMultilineDescription() {
+    let content = """
+    ---
+    name: browse
+    description: |
+      Fast headless browser for QA testing.
+      Navigate any URL, interact with elements.
+    allowed-tools:
+      - Bash
+    ---
+    """
+    let result = SkillService.parseFrontmatter(from: content)
+    #expect(result?.name == "browse")
+    #expect(result?.description.hasPrefix("Fast headless browser") == true)
+    #expect(result?.description.contains("Navigate any URL") == true)
+}
+
+@Test func parseFoldedDescription() {
+    let content = """
+    ---
+    name: careful
+    description: >
+      Safety guardrails for destructive commands.
+      Warns before rm -rf and force-push.
+    ---
+    """
+    let result = SkillService.parseFrontmatter(from: content)
+    #expect(result?.name == "careful")
+    #expect(result?.description.hasPrefix("Safety guardrails") == true)
+}

@@ -23,12 +23,36 @@ class SkillService {
         var name: String?
         var description: String?
 
-        for line in frontmatterLines {
-            if line.trimmingCharacters(in: .whitespaces).hasPrefix("name:") {
-                name = extractYAMLValue(from: line)
-            } else if line.trimmingCharacters(in: .whitespaces).hasPrefix("description:") {
-                description = extractYAMLValue(from: line)
+        let fmLines = Array(frontmatterLines)
+        var i = 0
+        while i < fmLines.count {
+            let trimmed = fmLines[i].trimmingCharacters(in: .whitespaces)
+            if trimmed.hasPrefix("name:") {
+                name = extractYAMLValue(from: fmLines[i])
+            } else if trimmed.hasPrefix("description:") {
+                let inlineValue = extractYAMLValue(from: fmLines[i])
+                if inlineValue == "|" || inlineValue == ">" {
+                    // YAML multiline block: collect indented lines that follow
+                    var multiLines: [String] = []
+                    var j = i + 1
+                    while j < fmLines.count {
+                        let next = fmLines[j]
+                        // Indented continuation line (starts with spaces/tabs)
+                        if next.hasPrefix("  ") || next.hasPrefix("\t") {
+                            multiLines.append(next.trimmingCharacters(in: .whitespaces))
+                        } else {
+                            break
+                        }
+                        j += 1
+                    }
+                    description = multiLines.joined(separator: " ").trimmingCharacters(in: .whitespaces)
+                    i = j
+                    continue
+                } else {
+                    description = inlineValue
+                }
             }
+            i += 1
         }
 
         guard let name, !name.isEmpty else { return nil }
