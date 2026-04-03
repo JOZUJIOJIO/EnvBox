@@ -69,3 +69,58 @@ import Foundation
     #expect(vars[2].name == "ANTHROPIC_BASE_URL")
     #expect(vars[2].value == "https://www.example.com")
 }
+
+@Test func addVariable() {
+    let original = """
+    export EXISTING="value1"
+    """
+    let result = ZshrcService.addExport(to: original, name: "NEW_KEY", value: "new-value")
+    #expect(result.contains(#"export NEW_KEY="new-value""#))
+    #expect(result.contains(#"export EXISTING="value1""#))
+}
+
+@Test func addVariableWithBaseURL() {
+    let original = "export EXISTING=\"value1\"\n"
+    let result = ZshrcService.addExport(to: original, name: "OPENAI_API_KEY", value: "sk-123", baseURL: "https://api.openai.com")
+    #expect(result.contains(#"export OPENAI_API_KEY="sk-123""#))
+    #expect(result.contains(#"export OPENAI_BASE_URL="https://api.openai.com""#))
+}
+
+@Test func addVariableBaseURLNaming() {
+    let result = ZshrcService.addExport(to: "", name: "ANTHROPIC_API_KEY", value: "sk-x", baseURL: "https://example.com")
+    #expect(result.contains(#"export ANTHROPIC_BASE_URL="https://example.com""#))
+}
+
+@Test func updateVariable() {
+    let original = """
+    some other line
+    export MY_KEY="old-value"
+    another line
+    """
+    let result = ZshrcService.updateExport(in: original, lineIndex: 1, newValue: "new-value")
+    #expect(result.contains(#"export MY_KEY="new-value""#))
+    #expect(result.contains("some other line"))
+    #expect(result.contains("another line"))
+    #expect(!result.contains("old-value"))
+}
+
+@Test func deleteVariable() {
+    let original = """
+    line zero
+    export MY_KEY="to-delete"
+    line two
+    """
+    let result = ZshrcService.deleteExport(from: original, lineIndex: 1)
+    #expect(!result.contains("MY_KEY"))
+    #expect(result.contains("line zero"))
+    #expect(result.contains("line two"))
+}
+
+@Test func addVariableDuplicateDetection() {
+    let content = """
+    export MY_KEY="existing"
+    """
+    let vars = ZshrcService.parseExports(from: content)
+    let hasDuplicate = vars.contains { $0.name == "MY_KEY" }
+    #expect(hasDuplicate)
+}

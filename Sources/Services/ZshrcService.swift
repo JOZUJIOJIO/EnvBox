@@ -44,6 +44,67 @@ class ZshrcService {
         return results
     }
 
+    /// Derive base URL variable name from an API key name.
+    /// "OPENAI_API_KEY" -> "OPENAI_BASE_URL"
+    /// "MY_SERVICE_KEY" -> "MY_SERVICE_BASE_URL"
+    /// "RANDOM_NAME" -> "RANDOM_NAME_BASE_URL"
+    static func baseURLName(from keyName: String) -> String {
+        if keyName.hasSuffix("_API_KEY") {
+            return String(keyName.dropLast("_API_KEY".count)) + "_BASE_URL"
+        }
+        if keyName.hasSuffix("_KEY") {
+            return String(keyName.dropLast("_KEY".count)) + "_BASE_URL"
+        }
+        return keyName + "_BASE_URL"
+    }
+
+    /// Add a new export line to the end of the content.
+    static func addExport(to content: String, name: String, value: String, baseURL: String? = nil) -> String {
+        var result = content
+        if !result.isEmpty && !result.hasSuffix("\n") {
+            result += "\n"
+        }
+        result += "export \(name)=\"\(value)\"\n"
+        if let baseURL, !baseURL.isEmpty {
+            let urlName = baseURLName(from: name)
+            result += "export \(urlName)=\"\(baseURL)\"\n"
+        }
+        return result
+    }
+
+    /// Update the value of an export at a specific line index.
+    static func updateExport(in content: String, lineIndex: Int, newValue: String) -> String {
+        var lines = content.components(separatedBy: "\n")
+        guard lineIndex >= 0 && lineIndex < lines.count else { return content }
+
+        let line = lines[lineIndex]
+        let pattern = #"^(\s*export\s+[A-Za-z_][A-Za-z0-9_]*)=.*"#
+        if let regex = try? NSRegularExpression(pattern: pattern),
+           let match = regex.firstMatch(in: line, range: NSRange(line.startIndex..., in: line)),
+           let prefixRange = Range(match.range(at: 1), in: line) {
+            lines[lineIndex] = "\(line[prefixRange])=\"\(newValue)\""
+        }
+
+        return lines.joined(separator: "\n")
+    }
+
+    /// Delete the export line at a specific line index.
+    static func deleteExport(from content: String, lineIndex: Int) -> String {
+        var lines = content.components(separatedBy: "\n")
+        guard lineIndex >= 0 && lineIndex < lines.count else { return content }
+        lines.remove(at: lineIndex)
+        return lines.joined(separator: "\n")
+    }
+
+    /// Write content to ~/.zshrc and source it.
+    static func writeAndSource(_ content: String) throws {
+        try content.write(toFile: zshrcPath, atomically: true, encoding: .utf8)
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/zsh")
+        process.arguments = ["-c", "source \(zshrcPath)"]
+        try? process.run()
+    }
+
     /// Read and parse ~/.zshrc. Returns empty array if file doesn't exist.
     static func loadVariables() -> [EnvVariable] {
         guard let content = try? String(contentsOfFile: zshrcPath, encoding: .utf8) else {
