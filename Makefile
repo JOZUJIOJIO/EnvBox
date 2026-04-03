@@ -12,6 +12,7 @@ release:
 	mkdir -p $(APP_BUNDLE)/Contents/MacOS
 	mkdir -p $(APP_BUNDLE)/Contents/Resources
 	cp $(BUILD_DIR)/$(APP_NAME) $(APP_BUNDLE)/Contents/MacOS/
+	cp AppIcon.icns $(APP_BUNDLE)/Contents/Resources/
 	@echo '<?xml version="1.0" encoding="UTF-8"?>' > $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<plist version="1.0"><dict>' >> $(APP_BUNDLE)/Contents/Info.plist
@@ -19,6 +20,7 @@ release:
 	@echo '<key>CFBundleIdentifier</key><string>com.envbox.app</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>CFBundleName</key><string>EnvBox</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>CFBundleVersion</key><string>1.0</string>' >> $(APP_BUNDLE)/Contents/Info.plist
+	@echo '<key>CFBundleIconFile</key><string>AppIcon</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>LSUIElement</key><true/>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>LSMinimumSystemVersion</key><string>13.0</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '</dict></plist>' >> $(APP_BUNDLE)/Contents/Info.plist
