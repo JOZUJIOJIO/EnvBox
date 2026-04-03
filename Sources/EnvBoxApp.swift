@@ -30,6 +30,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(togglePopover)
             button.target = self
         }
+
+        setupHotKey()
+    }
+
+    private func setupHotKey() {
+        NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            // Ctrl+Shift+E to toggle
+            if event.modifierFlags.contains([.control, .shift]) && event.keyCode == 14 { // 14 = E
+                DispatchQueue.main.async {
+                    self?.togglePopover()
+                }
+            }
+        }
     }
 
     @objc private func togglePopover() {
