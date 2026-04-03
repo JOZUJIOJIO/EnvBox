@@ -81,7 +81,8 @@ class SkillService {
                   let meta = parseFrontmatter(from: content) else {
                 continue
             }
-            skills.append(Skill(name: meta.name, description: meta.description, source: source))
+            let description = SkillTranslations.translate(name: meta.name, original: meta.description)
+            skills.append(Skill(name: meta.name, description: description, source: source))
         }
         return skills.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
