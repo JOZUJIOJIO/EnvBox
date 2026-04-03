@@ -1,5 +1,5 @@
 import Testing
-@testable import EnvBox
+@testable import AIVault
 
 @Suite("EnvVariable Tests")
 struct EnvVariableTests {

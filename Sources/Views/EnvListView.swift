@@ -19,7 +19,7 @@ struct EnvListView: View {
             // Header
             HStack {
                 HStack(spacing: 6) {
-                    Text("🔑 EnvBox")
+                    Text("🔑 AIVault")
                         .font(.system(size: 15, weight: .semibold))
                     Text("\(variables.count) 个变量")
                         .font(.system(size: 11))

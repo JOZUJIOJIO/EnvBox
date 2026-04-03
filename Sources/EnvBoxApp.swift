@@ -2,7 +2,7 @@ import SwiftUI
 import AppKit
 
 @main
-struct EnvBoxApp: App {
+struct AIVaultApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "EnvBox")
+            button.image = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "AIVault")
             button.action = #selector(togglePopover)
             button.target = self
         }

@@ -2,16 +2,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "EnvBox",
+    name: "AIVault",
     platforms: [.macOS(.v13)],
     targets: [
         .executableTarget(
-            name: "EnvBox",
+            name: "AIVault",
             path: "Sources"
         ),
         .testTarget(
-            name: "EnvBoxTests",
-            dependencies: ["EnvBox"],
+            name: "AIVaultTests",
+            dependencies: ["AIVault"],
             path: "Tests"
         ),
     ]

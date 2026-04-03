@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import EnvBox
+@testable import AIVault
 
 @Test func parseDoubleQuotedExport() {
     let content = """

@@ -1,4 +1,4 @@
-APP_NAME = EnvBox
+APP_NAME = AIVault
 BUILD_DIR = .build/release
 APP_BUNDLE = $(APP_NAME).app
 
@@ -16,9 +16,9 @@ release:
 	@echo '<?xml version="1.0" encoding="UTF-8"?>' > $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<plist version="1.0"><dict>' >> $(APP_BUNDLE)/Contents/Info.plist
-	@echo '<key>CFBundleExecutable</key><string>EnvBox</string>' >> $(APP_BUNDLE)/Contents/Info.plist
-	@echo '<key>CFBundleIdentifier</key><string>com.envbox.app</string>' >> $(APP_BUNDLE)/Contents/Info.plist
-	@echo '<key>CFBundleName</key><string>EnvBox</string>' >> $(APP_BUNDLE)/Contents/Info.plist
+	@echo '<key>CFBundleExecutable</key><string>AIVault</string>' >> $(APP_BUNDLE)/Contents/Info.plist
+	@echo '<key>CFBundleIdentifier</key><string>com.aivault.app</string>' >> $(APP_BUNDLE)/Contents/Info.plist
+	@echo '<key>CFBundleName</key><string>AIVault</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>CFBundleVersion</key><string>1.0</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>CFBundleIconFile</key><string>AppIcon</string>' >> $(APP_BUNDLE)/Contents/Info.plist
 	@echo '<key>LSUIElement</key><true/>' >> $(APP_BUNDLE)/Contents/Info.plist
